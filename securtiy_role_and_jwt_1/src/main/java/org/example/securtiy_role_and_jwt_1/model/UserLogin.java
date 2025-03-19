@@ -3,6 +3,8 @@ package org.example.securtiy_role_and_jwt_1.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 
 @Entity
 @Table
@@ -22,6 +24,11 @@ public class UserLogin {
    @JoinColumn(name = "user_detail_id", referencedColumnName = "id")
    @JsonIgnore
     private UserDetails userDetails;
+
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     //  -------- Getters Setters
 
@@ -65,5 +72,13 @@ public class UserLogin {
 
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
