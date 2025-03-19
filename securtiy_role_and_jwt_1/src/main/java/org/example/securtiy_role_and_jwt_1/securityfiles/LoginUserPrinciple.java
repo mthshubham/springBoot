@@ -1,4 +1,57 @@
 package org.example.securtiy_role_and_jwt_1.securityfiles;
 
-public class LoginUserPrinciple {
+import org.example.securtiy_role_and_jwt_1.model.UserLogin;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+public class LoginUserPrinciple implements UserDetails {
+
+    private UserLogin user;
+    public LoginUserPrinciple(UserLogin user) {
+        this.user = user;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        //return List.of();
+    }
+
+    @Override
+    public String getPassword() {
+        return user.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        return user.getUsername();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+        //return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+        //return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+//        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return user.isEnabled();
+    }
 }

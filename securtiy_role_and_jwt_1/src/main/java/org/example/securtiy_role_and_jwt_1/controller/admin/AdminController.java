@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
+
     @Autowired
     private UserService userService;
+
+    @GetMapping("/")
+    public String adminLogin(){return "admin login success";}
 
     @GetMapping("/allusers")   /* ------------ Show all User  */
     public List<UserDetails> showAllUsers(){
